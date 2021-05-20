@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     marginTop: 30,
   },
   root: {
-    minWidth: 275,
+    minWidth: 275,    
   },
   bullet: {
     display: "inline-block",
@@ -62,6 +62,15 @@ const useStyles = makeStyles({
     fontSize: 35,
     cursor: "pointer",
   },
+  grid:{
+    display:"flex",
+    flexDirection:"row",    
+    '@media (max-width: 600px)': {
+      flexDirection:"column",
+      justifyContent:"center",
+    }
+  }
+  
 });
 
 const Inicio = () => {
@@ -88,14 +97,7 @@ const Inicio = () => {
 
   console.log(data);
 
-  useEffect(() => {
-    //if data is diffetent undefined
-    if (data) {
-      setrepositories(data.user.repositories.nodes);
-      setavatarurl(data.user.avatarUrl);
-      getFavorites();
-    }
-  }, [data, refresh]);
+  
 
   //Get the list of favorite repositories
   const getFavorites = () => {
@@ -116,6 +118,16 @@ const Inicio = () => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    //if data is diffetent undefined
+    if (data) {
+      setrepositories(data.user.repositories.nodes);
+      setavatarurl(data.user.avatarUrl);
+      getFavorites();
+    }
+  }, [data, refresh]);
+
  //reload all repositories from the github api
   const getAll = () => {
     refetch();
@@ -218,11 +230,11 @@ const Inicio = () => {
                 Favorites
               </Button>
             </Grid>
-            <Grid container spacing={3}>
+            <Grid container spacing={5} className={classes.grid}>
               {!loading ? (
                 repositories.length !== 0 ? (
                   repositories.map((repo, index) => (
-                    <Grid item xs={3} index={index}>
+                    <Grid item xs={3}  index={index}>
                       <Card  elevation={3} className={classes.root}>
                         <CardContent className={classes.content}>
                           <Typography

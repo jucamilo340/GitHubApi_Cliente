@@ -93,13 +93,20 @@ const Login = () => {
           )
           history.push('/Login')
         })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire(
-            'There was an Error creating the user',
-            '',
-            'error'
-          )
+        .catch((err) => {;
+          if(err.response){
+            Swal.fire(
+              err.response.data.msg,
+              '',
+              'error'
+            )
+          }else{
+            Swal.fire(
+              'Connection error',
+              '',
+              'error'
+            )
+          }          
         });
           
         },

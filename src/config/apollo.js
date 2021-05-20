@@ -7,12 +7,12 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = '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';
+  const code = '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';
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: code ? `Bearer ${code}` : "",  
     }
   }
 });

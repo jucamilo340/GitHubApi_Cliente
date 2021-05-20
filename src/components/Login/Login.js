@@ -89,7 +89,7 @@ const Login = () => {
           
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
           Swal.fire(
             'There was an Error Login the user',
             '',
